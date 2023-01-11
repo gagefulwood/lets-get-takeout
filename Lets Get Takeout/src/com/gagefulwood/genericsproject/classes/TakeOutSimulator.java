@@ -71,4 +71,13 @@ public class TakeOutSimulator {
 		};
 		return getOutputOnIntInput(userPrompt,intUserInputRetriever);
 	}
+	
+	public void checkCustomer(ShoppingBag<Food> shoppingBag) {
+		StringBuilder checkoutMessage = new StringBuilder();
+		customer.setMoney(customer.getMoney()-shoppingBag.getTotalPrice());
+		checkoutMessage.append("Payment processing...\n");
+		checkoutMessage.append("Remaining Balance: $").append(customer.getMoney());
+		checkoutMessage.append("\nEnjoy your food!");
+		System.out.print(checkoutMessage);
+	}
 }
