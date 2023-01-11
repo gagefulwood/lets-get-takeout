@@ -44,4 +44,31 @@ public class TakeOutSimulator {
 		
 		return intUserInputRetriever.produceOutputOnIntUserInput(input.nextInt());
 	}
+	
+	public Food getMenuSelection() {
+		String userPrompt = menu.toString();
+		IntUserInputRetriever<Food> intUserInputRetriever = (int selection) -> {
+			Food selectedFood = menu.getFood(selection-1);
+			if (selectedFood == null) {
+				throw new IllegalArgumentException("Menu Food Value is Null.");
+			} else {
+				return selectedFood;
+			}
+		};
+		return getOutputOnIntInput(userPrompt,intUserInputRetriever);
+	}
+	
+	public boolean isStillOrderingFood() {
+		String userPrompt = "Enter [1] to CONTINUE SHOPPING\nEnter [0] to CHECKOUT\n\t";
+		IntUserInputRetriever<Boolean> intUserInputRetriever = (int selection) -> {
+			if (selection==1) {
+				return true;
+			} else if (selection==0) {
+				return false;
+			} else {
+				throw new IllegalArgumentException("Invalid selection: Selection must be [0] or [1]");
+			}
+		};
+		return getOutputOnIntInput(userPrompt,intUserInputRetriever);
+	}
 }
